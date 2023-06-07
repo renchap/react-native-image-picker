@@ -8,6 +8,7 @@ export interface OptionsCommon {
   videoQuality?: AndroidVideoOptions | iOSVideoOptions;
   includeBase64?: boolean;
   includeExtra?: boolean;
+  copyToAppStorage?: boolean;
   formatAsMp4?: boolean;
   presentationStyle?:
     | 'currentContext'
@@ -16,11 +17,8 @@ export interface OptionsCommon {
     | 'formSheet'
     | 'popover'
     | 'overFullScreen'
-    | 'overCurrentContext'
-    assetRepresentationMode?:
-    | 'auto'
-    | 'current'
-    | 'compatible';
+    | 'overCurrentContext';
+  assetRepresentationMode?: 'auto' | 'current' | 'compatible';
 }
 
 export interface ImageLibraryOptions extends OptionsCommon {

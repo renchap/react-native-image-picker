@@ -7,6 +7,7 @@ public class Options {
     int selectionLimit;
     Boolean includeBase64;
     Boolean includeExtra;
+    Boolean copyToAppStorage = true;
     int videoQuality = 1;
     int quality;
     int maxWidth;
@@ -22,6 +23,7 @@ public class Options {
         selectionLimit = options.getInt("selectionLimit");
         includeBase64 = options.getBoolean("includeBase64");
         includeExtra = options.getBoolean("includeExtra");
+        copyToAppStorage = options.getBoolean("copyToAppStorage");
 
         String videoQualityString = options.getString("videoQuality");
         if(!TextUtils.isEmpty(videoQualityString) && !videoQualityString.toLowerCase().equals("high")) {

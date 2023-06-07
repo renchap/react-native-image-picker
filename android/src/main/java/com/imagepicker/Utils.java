@@ -427,8 +427,18 @@ public class Utils {
         map.putDouble("fileSize", getFileSize(uri, context));
         map.putInt("duration", videoMetadata.getDuration());
         map.putInt("bitrate", videoMetadata.getBitrate());
-        map.putString("fileName", fileName);
-        map.putString("type", getMimeType(uri, context));
+
+        String mimeType = getMimeType(uri, context);
+        map.putString("type", mimeType);
+
+        if (uri.getScheme().contains("content") && !fileName.contains(".")) {
+            // content URLs may be only the photo ID, without a file extension
+            // for example when not copying the file and using the Android 13 picker
+            map.putString("fileName", fileName + "." + getFileTypeFromMime(mimeType));
+        } else {
+            map.putString("fileName", fileName);
+        }
+
         map.putInt("width", videoMetadata.getWidth());
         map.putInt("height", videoMetadata.getHeight());
 
@@ -449,13 +459,13 @@ public class Utils {
 
             // Call getAppSpecificStorageUri in the if block to avoid copying unsupported files
             if (isImageType(uri, context)) {
-                if (uri.getScheme().contains("content")) {
+                if (options.copyToAppStorage && uri.getScheme().contains("content")) {
                     uri = getAppSpecificStorageUri(uri, context);
                 }
                 uri = resizeImage(uri, context, options);
                 assets.pushMap(getImageResponseMap(uri, options, context));
             } else if (isVideoType(uri, context)) {
-                if (uri.getScheme().contains("content")) {
+                if (options.copyToAppStorage && uri.getScheme().contains("content")) {
                     uri = getAppSpecificStorageUri(uri, context);
                 }
                 assets.pushMap(getVideoResponseMap(uri, options, context));

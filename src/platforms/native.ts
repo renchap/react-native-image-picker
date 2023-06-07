@@ -19,6 +19,7 @@ const DEFAULT_OPTIONS: ImageLibraryOptions & CameraOptions = {
   saveToPhotos: false,
   durationLimit: 0,
   includeExtra: false,
+  copyToAppStorage: true,
   presentationStyle: 'pageSheet',
   assetRepresentationMode: 'auto',
 };
@@ -26,9 +27,9 @@ const DEFAULT_OPTIONS: ImageLibraryOptions & CameraOptions = {
 // @ts-ignore We want to check whether __turboModuleProxy exitst, it may not
 const isTurboModuleEnabled = global.__turboModuleProxy != null;
 
-const nativeImagePicler = isTurboModuleEnabled ?
-  require("./NativeImagePicker").default :
-  NativeModules.ImagePicker;
+const nativeImagePicler = isTurboModuleEnabled
+  ? require('./NativeImagePicker').default
+  : NativeModules.ImagePicker;
 
 export function camera(
   options: CameraOptions,

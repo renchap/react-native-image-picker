@@ -13,6 +13,7 @@ import * as ImagePicker from 'react-native-image-picker';
 
 /* toggle includeExtra */
 const includeExtra = true;
+const copyToAppStorage = false;
 
 export default function App() {
   const [response, setResponse] = React.useState<any>(null);
@@ -28,7 +29,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <DemoTitle>🌄 React Native Image Picker</DemoTitle>
-      <ScrollView>
+      <ScrollView nestedScrollEnabled>
         <View style={styles.buttonContainer}>
           {actions.map(({title, type, options}) => {
             return (
@@ -93,6 +94,7 @@ const actions: Action[] = [
       mediaType: 'photo',
       includeBase64: false,
       includeExtra,
+      copyToAppStorage,
     },
   },
   {
@@ -103,6 +105,7 @@ const actions: Action[] = [
       mediaType: 'photo',
       includeBase64: false,
       includeExtra,
+      copyToAppStorage,
     },
   },
   {
@@ -113,6 +116,7 @@ const actions: Action[] = [
       formatAsMp4: true,
       mediaType: 'video',
       includeExtra,
+      copyToAppStorage,
     },
   },
   {
@@ -123,6 +127,7 @@ const actions: Action[] = [
       mediaType: 'video',
       formatAsMp4: true,
       includeExtra,
+      copyToAppStorage,
     },
   },
   {
@@ -132,6 +137,7 @@ const actions: Action[] = [
       selectionLimit: 0,
       mediaType: 'mixed',
       includeExtra,
+      copyToAppStorage,
     },
   },
 ];
@@ -144,6 +150,7 @@ if (Platform.OS === 'ios') {
       saveToPhotos: true,
       mediaType: 'mixed',
       includeExtra,
+      copyToAppStorage,
       presentationStyle: 'fullScreen',
     },
   });
