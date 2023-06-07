@@ -155,6 +155,10 @@ public class ImagePickerModuleImpl implements ActivityEventListener {
             libraryIntent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*", "video/*"});
         }
 
+        if(!this.options.copyToAppStorage) {
+            libraryIntent.setFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        }
+
         try {
             currentActivity.startActivityForResult(libraryIntent, requestCode);
         } catch (ActivityNotFoundException e) {

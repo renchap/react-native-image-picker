@@ -457,6 +457,10 @@ public class Utils {
         for(int i = 0; i < fileUris.size(); ++i) {
             Uri uri = fileUris.get(i);
 
+            if(!options.copyToAppStorage) {
+                context.getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            }
+
             // Call getAppSpecificStorageUri in the if block to avoid copying unsupported files
             if (isImageType(uri, context)) {
                 if (options.copyToAppStorage && uri.getScheme().contains("content")) {
